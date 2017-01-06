@@ -1,0 +1,15 @@
+{
+  "name": "copycat",
+  "version": "1.0.0",
+  "description": "Universal MITM web server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Michael Wetherald",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "request": "^2.79.0"
+  }
+}
