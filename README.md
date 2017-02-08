@@ -2,6 +2,9 @@
 
 CopyCat is a Node.js based universal MITM web server. Used with DNS spoofing or another redirect attack, this server will act as a MITM for web traffic between the victim and a real server.
 
+Here's an example of a google search going through CopyCat as a gif. For ants...
+![](https://zippy.gfycat.com/ThunderousSoggyGreatargus.gif)
+
 Most often we see DNS spoofing used to redirect victims to an attackers server hosting a static clone of the spoofed domain's login page. But this server will forward all traffic between the victim and the spoofed domain allowing an attacker to sit in as the MITM while the victim interacts with the real domain. This also allows the attacker to inject scripts and manipulate the victim's interactions with the intended web server.
 
 All urls are hijacked inside the HTML response from the server causing all traffic to be rerouted back through the server (provided you have a redirect attack for those domains as well).
@@ -39,7 +42,7 @@ $ sudo node server.js
 The attacker directs the victim to the spoofed domain for example http://us-west-4.facebook.com. Using DNS spoofing this request is sent to this server. It recognizes the pattern "us-west-4" means this should be a request to https://www.facebook.com. A session is either generated or looked up and associated with the request. The server makes a request to that domain. When a response is received, it hijacks any urls in the HTML to be their spoofed counterpart to ensure those requests are sent back through this server. Any cookies from the real domain are attached to the victims session to be used with future requests. Security headers are modified or deleted to allow content to render properly. A script is injected into the HTML before responding. This client side script (public/hijacks.js) overwrites the native [XMLHttpRequest.open](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open) method to hijack the requested url. It also traverses the DOM looking for elements which request content and hijacks their urls in case they were added client side or slipped past the server side url hijaking function. The end result being a functioning version of the spoofed domain.
 
 ### What can I do with it?
-This is nothing more than a functioning platform for being a MITM with web requests. The potential to use this with other attacks is there. You completely own this domain and can run whatever arbitrary scripts you'd like, or even inject a [BeEF](http://beefproject.com/). If they're going through this server you have complete control of the victim's experience.
+This is nothing more than a functioning platform for being a MITM with web requests. The potential to use this with other attacks is there. You completely own this domain and can run whatever arbitrary scripts you'd like, or even inject a [BeEF](http://beefproject.com/) hook. If they're going through this server you have complete control of the victim's experience.
 
 ### What's Next?
 Stay tuned for updates to [VeAL](https://github.com/compewter/veal). Once that platform is there to manage victim sessions, you will be able to view and manipulate victim's sessions with ease.
